@@ -1,0 +1,89 @@
+spring:
+  profiles:
+    active: local
+---
+server:
+  port: 8083
+
+logging:
+  level:
+    yongs:
+      temp: DEBUG
+      
+spring:
+  config:
+    activate:
+      on-profile: local
+  application:
+    name: ing-order
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: example
+      authentication-database: admin
+      username: scott
+      password: tiger
+  kafka:
+    bootstrap-servers: localhost:9091
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: order
+      enable-auto-commit: false
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      ack-mode: manual-immediate
+
+feign:
+  user:
+    url: http://localhost:8081
+  product:
+    url: http://localhost:8082
+    
+---
+server:
+  port: 8080
+
+logging:
+  level:
+    yongs:
+      temp: INFO
+      
+spring:
+  config:
+    activate:
+      on-profile: container
+  application:
+    name: ing-order
+  data:
+    mongodb:
+      host: mongo
+      port: 27017
+      database: example
+      authentication-database: admin
+      username: scott
+      password: tiger
+  kafka:
+    bootstrap-servers: kafka:19091
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: order
+      enable-auto-commit: false
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      ack-mode: manual-immediate
+ 
+feign:
+  user:
+    url: http://ing-user
+  product:
+    url: http://ing-product
+     
