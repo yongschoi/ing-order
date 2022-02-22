@@ -83,7 +83,7 @@ spring:
  
 feign:
   user:
-    url: http://ing-user.default.svc.cluster.local
+    url: http://ing-user:8080
   product:
-    url: http://ing-product.default.svc.cluster.local
+    url: http://ing-product:8080
      
