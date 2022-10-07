@@ -61,14 +61,14 @@ spring:
     name: ing-order
   data:
     mongodb:
-      host: mongo
-      port: 27017
-      database: example
-      authentication-database: admin
-      username: scott
-      password: tiger
+      host: ${MONGODB_HOST}
+      port: ${MONGODB_PORT}
+      database: ${MONGODB_DATABASE}
+      authentication-database: ${MONGODB_AUTH}
+      username: ${MONGODB_USER}
+      password: ${MONGODB_PASSWORD}
   kafka:
-    bootstrap-servers: kafka:19091
+    bootstrap-servers: ${KAFKA_SERVER}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
@@ -83,7 +83,7 @@ spring:
  
 feign:
   user:
-    url: http://ing-user:8080
+    url: ${FEIGN_USER_URL}
   product:
-    url: http://ing-product:8080
+    url: ${FEIGN_PRODUCT_URL}
      
